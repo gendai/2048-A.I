@@ -75,21 +75,24 @@ void init_left_table()
 										shift = 1;
 								}
 						}
-						int row[4] = {c1t, c2t, c3t, c4t};
-						int row_res[4];
+						uint16_t row_res[4];
+						row_res[0] = c1t;
+						row_res[1] = c2t;
+						row_res[2] = c3t;
+						row_res[3] = c4t;
 						auto bt = 0;
 						while (bt != 3)
 						{
-							if (row[bt] == row[bt + 1] && row[bt] != 0 && row[bt + 1] != 0)
+							if (row_res[bt] == row_res[bt + 1] && row_res[bt] != 0 && row_res[bt + 1] != 0)
 							{
-									row_res[bt] = row[bt] + 1;
+									row_res[bt] += 1;
 									for (auto btemp = bt + 1; btemp < 3; ++btemp)
-										row[btemp] = row[btemp + 1];
-									row[3] = 0;
+										row_res[btemp] = row_res[btemp + 1];
+									row_res[3] = 0;
 							}
 							bt++;
 						}
-						auto index = (c1 << 12) + (c2 << 8) + (c3 << 4) + c4;
+						uint16_t index = (c1 << 12) + (c2 << 8) + (c3 << 4) + c4;
 						LEFT_TABLE[index] = (row_res[0] << 12) + (row_res[1] << 8) + (row_res[2] << 4) + row_res[3];
 					}
 			}
@@ -166,17 +169,20 @@ void init_right_table()
 										shift = 1;
 								}
 						}
-						int row[4] = {c1t, c2t, c3t, c4t};
-						int row_res[4];
+						uint16_t row_res[4];
+						row_res[0] = c1t;
+						row_res[1] = c2t;
+						row_res[2] = c3t;
+						row_res[3] = c4t;
 						auto bt = 3;
 						while (bt != 0)
 						{
-							if (row[bt] == row[bt - 1] && row[bt] != 0 && row[bt - 1] != 0)
+							if (row_res[bt] == row_res[bt - 1] && row_res[bt] != 0 && row_res[bt - 1] != 0)
 							{
-									row_res[bt] = row[bt] + 1;
+									row_res[bt] += 1;
 									for (auto btemp = bt - 1; btemp > 0; --btemp)
-										row[btemp] = row[btemp - 1];
-									row[0] = 0;
+										row_res[btemp] = row_res[btemp - 1];
+									row_res[0] = 0;
 							}
 							bt--;
 						}
@@ -186,4 +192,14 @@ void init_right_table()
 			}
 		}
 	}
+}
+
+uint16_t get_left_table(uint16_t value)
+{
+	return LEFT_TABLE[value];
+}
+
+uint16_t get_right_table(uint16_t value)
+{
+	return RIGHT_TABLE[value];
 }
