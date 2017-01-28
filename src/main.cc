@@ -1,5 +1,5 @@
-#include <iostream>
 #include "board.hh"
+#include "game.hh"
 
 int main()
 {
@@ -12,5 +12,6 @@ int main()
   bo.print_board_term();
   std::cout << "Beautify board print: " << std::endl;
   bo.print_board_color();
+	init_tables();
   return 0;
 }

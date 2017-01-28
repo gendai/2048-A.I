@@ -3,6 +3,7 @@
 #include <cstdint>
 #include <cmath>
 #include <string>
+#include <iostream>
 
 class Board
 {
