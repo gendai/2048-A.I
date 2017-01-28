@@ -74,3 +74,40 @@ void Board::print_board_color() const
           << std::endl;
   }
 }
+
+uint16_t Board::get_row(int index) const
+{
+	uint64_t maskrow = 0x000000000000ffff;
+	uint64_t rowv = this->cases & (maskrow << (3 - index));
+	uint16_t res = rowv >> (3 - index);
+	return res;
+}
+
+uint16_t Board::get_col(int index) const
+{
+	uint64_t maskcol = 0xf000f000f000f000;
+	uint64_t maskval = 0xffff000000000000;
+	uint64_t colv = this->cases & (maskcol >> index);
+	uint16_t res = ((colv & maskval) >> 48) + ((colv & (maskval >> 16)) >> 36) + ((colv & (maskval >> 32)) >> 24) + ((colv & (maskval >> 48)) >> 12);
+	return res;
+}
+
+void Board::set_row(int index, uint16_t value)
+{
+	uint64_t vtemp = value << (16 * (3 - index));
+	uint64_t rowmask = 0x000000000000ffff;
+  uint64_t casestmp = this->cases & (~(rowmask << (16 * (3 - index))));
+	this->cases = casestmp | vtemp;
+}
+
+void Board::set_col(int index, uint16_t value)
+{
+	uint64_t c1 = value >> 12;
+	uint64_t c2 = (value >> 8) & 0xF;
+	uint64_t c3 = (value >> 4) & 0xF;
+	uint64_t c4 = value & 0xF;
+	set_case_value(index, c1);
+	set_case_value(4 + index, c2);
+	set_case_value(8 + index, c3);
+	set_case_value(12 + index, c4);
+}

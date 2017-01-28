@@ -13,7 +13,11 @@ class Board
     void print_board_term() const;
     void print_board_color() const;
     std::string board_case_format(int value) const;
-  private:
+  	uint16_t get_row(int index) const;
+		uint16_t get_col(int index) const;
+		void set_row(int index, uint16_t value);
+		void set_col(int index, uint16_t value);
+	private:
     uint64_t cases = 0;
     uint64_t mask = 0x000000000000000f;
 };

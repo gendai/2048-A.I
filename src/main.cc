@@ -13,5 +13,15 @@ int main()
   std::cout << "Beautify board print: " << std::endl;
   bo.print_board_color();
 	init_tables();
-  return 0;
+ 	bo.set_row(2, 0x4051);
+	std::cout << "Terminale mode board print (after set_row): " << std::endl;
+  bo.print_board_term();
+  std::cout << "Beautify board print (after set_row): " << std::endl;
+  bo.print_board_color();
+	bo.set_col(1, 0x7708);
+	std::cout << "Terminale mode board print (after set_col): " << std::endl;
+  bo.print_board_term();
+  std::cout << "Beautify board print (after set_col): " << std::endl;
+  bo.print_board_color();
+	return 0;
 }
