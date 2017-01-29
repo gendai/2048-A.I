@@ -20,6 +20,8 @@ class Board
 		void set_col(int index, uint16_t value);
 		void move_left();
 		void move_right();
+		void move_up();
+		void move_down();
 	private:
     uint64_t cases = 0;
     uint64_t mask = 0x000000000000000f;

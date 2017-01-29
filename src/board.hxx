@@ -87,8 +87,9 @@ uint16_t Board::get_col(int index) const
 {
 	uint64_t maskcol = 0xf000f000f000f000;
 	uint64_t maskval = 0xffff000000000000;
-	uint64_t colv = this->cases & (maskcol >> index);
-	uint16_t res = ((colv & maskval) >> 48) + ((colv & (maskval >> 16)) >> 36) + ((colv & (maskval >> 32)) >> 24) + ((colv & (maskval >> 48)) >> 12);
+	uint64_t colv = this->cases & (maskcol >> (index * 4));
+	uint16_t res = ((colv & maskval) >> (4 * (12 - index))) + ((colv & (maskval >> 16)) >> (4 * (9 - index)))
+								+ ((colv & (maskval >> 32)) >> (4 * (6 - index))) + ((colv & (maskval >> 48)) >> (4 * (3 - index)));
 	return res;
 }
 
@@ -115,7 +116,6 @@ void Board::set_col(int index, uint16_t value)
 
 void Board::move_left()
 {
-	std::cout << "get_row: " << get_row(0) << " get_left " << get_left_table(get_row(0)) << std::endl;
 	set_row(0, get_left_table(get_row(0)));
 	set_row(1, get_left_table(get_row(1)));
 	set_row(2, get_left_table(get_row(2)));
@@ -128,4 +128,20 @@ void Board::move_right()
 	set_row(1, get_right_table(get_row(1)));
 	set_row(2, get_right_table(get_row(2)));
 	set_row(3, get_right_table(get_row(3)));
+}
+
+void Board::move_up()
+{
+	set_col(0, get_left_table(get_col(0)));
+	set_col(1, get_left_table(get_col(1)));
+	set_col(2, get_left_table(get_col(2)));
+	set_col(3, get_left_table(get_col(3)));
+}
+
+void Board::move_down()
+{
+	set_col(0, get_right_table(get_col(0)));
+	set_col(1, get_right_table(get_col(1)));
+	set_col(2, get_right_table(get_col(2)));
+	set_col(3, get_right_table(get_col(3)));
 }

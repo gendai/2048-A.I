@@ -17,12 +17,18 @@ int main()
   bo.print_board_term();
   std::cout << "Beautify board print (after set_row): " << std::endl;
   bo.print_board_color();
+	std::cout << "Col0 " << bo.get_col(0) << " Col1 " << bo.get_col(1) << " Col2 " << bo.get_col(2) << " Col3 " << bo.get_col(3) << std::endl;
 	/*bo.set_col(0, 0x0020);
 	std::cout << "Terminale mode board print (after set_col): " << std::endl;
   bo.print_board_term();
   std::cout << "Beautify board print (after set_col): " << std::endl;
   bo.print_board_color();*/
 	bo.move_right();
+	std::cout << "Terminale mode board print (after move_left): " << std::endl;
+  bo.print_board_term();
+  std::cout << "Beautify board print (after move_left): " << std::endl;
+  bo.print_board_color();
+	bo.move_up();
 	std::cout << "Terminale mode board print (after move_left): " << std::endl;
   bo.print_board_term();
   std::cout << "Beautify board print (after move_left): " << std::endl;
