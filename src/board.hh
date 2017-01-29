@@ -5,6 +5,7 @@
 #include <string>
 #include <iostream>
 #include "game.hh"
+#include "rand.hh"
 
 class Board
 {
@@ -22,6 +23,7 @@ class Board
 		void move_right();
 		void move_up();
 		void move_down();
+		void set_rand();
 	private:
     uint64_t cases = 0;
     uint64_t mask = 0x000000000000000f;

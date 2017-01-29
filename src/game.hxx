@@ -1,9 +1,7 @@
 void init_tables()
 {
 	init_left_table();
-	std::cout << "Left table ready" << std::endl;
 	init_right_table();
-	std::cout << "Right table ready" << std::endl;
 }
 
 void init_left_table()

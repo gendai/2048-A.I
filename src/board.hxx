@@ -145,3 +145,16 @@ void Board::move_down()
 	set_col(2, get_right_table(get_col(2)));
 	set_col(3, get_right_table(get_col(3)));
 }
+
+void Board::set_rand()
+{
+	uint64_t val = 1 + (next_rand() % 10) / 9;
+	while (true)
+	{
+			uint64_t pos = next_rand() % 16;
+			if (get_case_value(pos) != 0)
+				continue;
+			set_case_value(pos, val);
+			break;
+	}
+}
