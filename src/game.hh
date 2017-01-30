@@ -1,5 +1,4 @@
-#ifndef GAME_HH
-#define GAME_HH
+#pragma once
 
 #include <cstdint>
 
@@ -12,6 +11,5 @@ void init_tables();
 
 uint16_t get_left_table(uint16_t value);
 uint16_t get_right_table(uint16_t value);
-#include "game.hxx"
 
-#endif
+#include "game.hxx"
