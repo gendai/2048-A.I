@@ -8,6 +8,12 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
 set(SRC
     src/main.cc
-		src/rand.cc)
+    src/rand.cc)
 
 add_executable(2048-ai ${SRC})
+
+add_custom_target(doc
+                  COMMAND doxygen Doxyfile.in
+                  WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/doc)
+add_dependencies(doc 2048-ai)
+

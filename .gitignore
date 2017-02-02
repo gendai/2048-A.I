@@ -30,3 +30,7 @@
 
 # Build directory
 build/
+
+# Html output of doc
+doc/html/
+doc/latex/
