@@ -26,6 +26,8 @@ class Board
     /// \param value  the value to set the case to.
     void set_case_value(int index, uint64_t value);
 
+    Board set_case_value_cpy(int index, uint64_t value);
+
     /// Print the board values separated by spaces.
     void print_board_term() const;
     
@@ -71,6 +73,18 @@ class Board
     /// Operate a down move of all cases.
     void move_down();
 
+    /// Operate a left move of all cases. 
+    Board get_move_left();
+    
+    /// Operate a right move of all cases.
+    Board get_move_right();
+
+    /// Operate a up move of all cases.
+    Board get_move_up();
+
+    /// Operate a down move of all cases.
+    Board get_move_down();
+
     /// Put a 2 or 4 on a random empty case.
     void set_rand();
 
@@ -92,7 +106,17 @@ class Board
 
     /// Check if a right move is valid.
     /// \return true if a right move is valid, false otherwise.
-    bool can_move_right() const;
+    bool can_move_right() const; 
+
+    void set_cases(uint64_t casen)
+    {
+      this->cases = casen;
+    }
+
+    uint64_t get_cases()
+    {
+      return this->cases;
+    }
 
   private:
 

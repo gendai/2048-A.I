@@ -18,6 +18,13 @@ void Board::set_case_value(int index, uint64_t value)
   this->cases = casestmp | vtemp;
 }
 
+Board Board::set_case_value_cpy(int index, uint64_t value)
+{
+  Board cpy = *this;
+  cpy.set_case_value(index, value);
+  return cpy;
+}
+
 void Board::print_board_term() const
 {
   for (int i = 0; i < 16; ++i)
@@ -153,6 +160,46 @@ void Board::move_down()
   set_col(1, get_right_table(get_col(1)));
   set_col(2, get_right_table(get_col(2)));
   set_col(3, get_right_table(get_col(3)));
+}
+
+Board Board::get_move_left()
+{
+  Board cpy = *this;
+  cpy.set_row(0, get_left_table(cpy.get_row(0)));
+  cpy.set_row(1, get_left_table(cpy.get_row(1)));
+  cpy.set_row(2, get_left_table(cpy.get_row(2)));
+  cpy.set_row(3, get_left_table(cpy.get_row(3)));
+  return cpy;
+}
+
+Board Board::get_move_right()
+{
+  Board cpy = *this;
+  cpy.set_row(0, get_right_table(cpy.get_row(0)));
+  cpy.set_row(1, get_right_table(cpy.get_row(1)));
+  cpy.set_row(2, get_right_table(cpy.get_row(2)));
+  cpy.set_row(3, get_right_table(cpy.get_row(3)));
+  return cpy;
+}
+
+Board Board::get_move_up()
+{
+  Board cpy = *this;
+  cpy.set_col(0, get_left_table(cpy.get_col(0)));
+  cpy.set_col(1, get_left_table(cpy.get_col(1)));
+  cpy.set_col(2, get_left_table(cpy.get_col(2)));
+  cpy.set_col(3, get_left_table(cpy.get_col(3)));
+  return cpy;
+}
+
+Board Board::get_move_down()
+{
+  Board cpy = *this;
+  cpy.set_col(0, get_right_table(cpy.get_col(0)));
+  cpy.set_col(1, get_right_table(cpy.get_col(1)));
+  cpy.set_col(2, get_right_table(cpy.get_col(2)));
+  cpy.set_col(3, get_right_table(cpy.get_col(3)));
+  return cpy;
 }
 
 void Board::set_rand()

@@ -1,4 +1,5 @@
 #include "board.hh"
+#include "ai.hh"
 #include <ctime>
 #include <cstdlib>
 
@@ -39,11 +40,14 @@ int play_game()
 int launch_ai()
 {
   std::cout << "Started A.I" << std::endl;
+  AI ai;
+  ai.start();
   return 0;
 }
 
 int main()
 {
+  init_tables();
   std::srand(std::time(0));
   Initialize(std::rand());
   std::string input = "";
