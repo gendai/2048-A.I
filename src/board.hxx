@@ -94,8 +94,10 @@ uint16_t Board::get_col(int index) const
   uint64_t maskval = 0xffff000000000000;
   int index4 = index * 4;
   uint64_t colv = this->cases & (maskcol >> index4);
-  uint16_t res = ((colv & maskval) >> (48 - index4)) + ((colv & (maskval >> 16)) >> (32 - index4))
-                + ((colv & (maskval >> 32)) >> (24 - index4)) + ((colv & (maskval >> 48)) >> (12 - index4));
+  uint16_t res = ((colv & maskval) >> (48 - index4))
+                + ((colv & (maskval >> 16)) >> (36 - index4))
+                + ((colv & (maskval >> 32)) >> (24 - index4))
+                + ((colv & (maskval >> 48)) >> (12 - index4));
   return res;
 }
 
@@ -166,14 +168,56 @@ void Board::set_rand()
   }
 }
 
-bool Board::is_over()
+bool Board::is_over() const
 {
   for (auto i = 0; i < 16; ++i)
   {
+    if (get_case_value(i) == 0)
+      return false;
     if ((i + 1) % 4 != 0 && get_case_value(i) == get_case_value(i + 1))
       return false;
     if (i < 12 && get_case_value(i) == get_case_value(i + 4))
       return false;
   }
   return true;
+}
+
+bool Board::can_move_right() const
+{
+  auto c0 = get_row(0);
+  auto c1 = get_row(1);
+  auto c2 = get_row(2);
+  auto c3 = get_row(3);
+  return !(c0 == get_right_table(c0) && c1 == get_right_table(c1) &&
+      c2 == get_right_table(c2) && c3 == get_right_table(c3));
+}
+
+bool Board::can_move_left() const
+{
+  auto c0 = get_row(0);
+  auto c1 = get_row(1);
+  auto c2 = get_row(2);
+  auto c3 = get_row(3);
+  return !(c0 == get_left_table(c0) && c1 == get_left_table(c1) &&
+      c2 == get_left_table(c2) && c3 == get_left_table(c3));
+}
+
+bool Board::can_move_down() const
+{
+  auto c0 = get_col(0);
+  auto c1 = get_col(1);
+  auto c2 = get_col(2);
+  auto c3 = get_col(3);
+  return !(c0 == get_right_table(c0) && c1 == get_right_table(c1) &&
+      c2 == get_right_table(c2) && c3 == get_right_table(c3));
+}
+
+bool Board::can_move_up() const
+{
+  auto c0 = get_col(0);
+  auto c1 = get_col(1);
+  auto c2 = get_col(2);
+  auto c3 = get_col(3);
+  return !(c0 == get_left_table(c0) && c1 == get_left_table(c1) &&
+      c2 == get_left_table(c2) && c3 == get_left_table(c3));
 }

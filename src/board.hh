@@ -24,7 +24,11 @@ class Board
     void move_up();
     void move_down();
     void set_rand();
-    bool is_over();
+    bool is_over() const;
+    bool can_move_down() const;
+    bool can_move_up() const;
+    bool can_move_left() const;
+    bool can_move_right() const;
   private:
     uint64_t cases = 0;
 };

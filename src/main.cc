@@ -15,20 +15,24 @@ int play_game()
   {
     std::string input = "";
     getline(std::cin, input);
-    if (input == "u")
+    if (input == "u" && bo.can_move_up())
       bo.move_up();
-    else if (input == "d")
+    else if (input == "d" && bo.can_move_down())
       bo.move_down();
-    else if (input == "l")
+    else if (input == "l" && bo.can_move_left())
       bo.move_left();
-    else if (input == "r")
+    else if (input == "r" && bo.can_move_right())
       bo.move_right();
     else
       continue;
     std::cout << CLEAR_SCREEN;
     bo.set_rand();
+    bo.print_board_term();
     bo.print_board_color();
   }
+  std::cout << CLEAR_SCREEN;
+  std::cout << "Game Over\n";
+  bo.print_board_color();
   return 0;
 }
 
